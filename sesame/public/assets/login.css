@@ -1,0 +1,365 @@
+/* login.css - Version Harmonisée (Light Mode) */
+:root {
+    --bg-color: #f4f1ea;       /* Fond Crème (idem Accueil/Register) */
+    --surface-color: #ffffff;  /* Plan de travail blanc (idem Papier Register) */
+    --text-color: #f4f1ea;     /* Texte Crème */
+    --accent: #27ae60;         /* Vert (Spécifique Login) */
+    --accent-hover: #219150;
+    --pot-color: #2c3e50;      /* Marmite sombre (Rappel couleur texte) */
+    --remove-color: #c0392b;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1); /* Ombre douce harmonisée */
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
+
+    /* --- NOUVEAU FOND --- */
+    /* On charge l'image et on applique une couche sombre semi-transparente par-dessus */
+    background: url('../assets/cuisine2.png'); 
+    
+    background-position: center center; /* Centre le feu horizontalement et verticalement */
+    background-repeat: no-repeat;
+    background-size: cover; /* L'image couvre tout l'écran sans se déformer */
+    background-attachment: fixed; /* L'image ne bouge pas si on scrolle sur de petits écrans */
+}
+
+h1 { 
+    color: var(--text-color); 
+    margin-bottom: 5px; 
+    font-weight: 800; /* Plus gras comme l'accueil */
+    letter-spacing: -1px;
+}
+.subtitle { 
+    color: #ffffff; 
+    margin-bottom: 30px; 
+    font-size: 1.1rem; 
+    font-weight: 300;
+}
+
+.kitchen-surface {
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    max-width: 1100px;
+    height: 600px;
+    /* Rendre le fond transparent (ici 30% d'opacité) */
+    background: rgba(149, 165, 166, 0.3);
+    /* Ajouter une bordure colorée (orange) */
+    border: 3px solid var(--accent);
+    padding: 20px;
+    border-radius: 15px;
+    /* Ajuster l'ombre pour qu'elle soit plus "lumineuse" et colorée */
+    box-shadow: 0 0 30px rgba(230, 126, 34, 0.5);
+    position: relative;
+    /* Effet de flou derrière le panneau pour améliorer la lisibilité (optionnel) */
+    backdrop-filter: blur(0px);
+}
+
+/* --- Sidebar Gauche --- */
+.pantry {
+    flex: 1;
+    background: #f9f9f9; /* Légèrement grisé pour se distinguer du fond blanc */
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+}
+
+.pantry h3 { margin-top: 0; color: var(--accent); }
+
+.pantry-category-title {
+    color: var(--accent);
+    margin: 15px 0 5px 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+.pantry-category-title:first-child { margin-top: 0; }
+
+.pantry, .tracker {
+    flex: 1;
+    /* Rendre leur fond semi-transparent aussi pour qu'ils se fondent mieux */
+    background: rgba(255, 255, 255, 0.8);
+    /* Ajouter une bordure colorée à eux aussi */
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.ingredient {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 5px;
+    text-align: center;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.ingredient:hover { 
+    border-color: var(--accent); 
+    background: #eafaf1; /* Vert très pâle */
+    transform: scale(1.05); 
+}
+.ingredient:active { cursor: grabbing; }
+.ingredient span { font-size: 1.8rem; display: block; }
+.ingredient p { margin: 2px 0 0; font-size: 0.7rem; color: #555; }
+
+/* --- Centre (La Marmite) --- */
+.cooking-zone {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 10;
+}
+
+.recipe-name-input {
+    margin-bottom: auto;
+    width: 80%;
+    padding: 15px;
+    font-size: 1.2rem;
+    /* Rendre l'input semi-transparent avec une bordure */
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    /* Changer la couleur du texte pour qu'il soit lisible */
+    color: #333;
+}
+.recipe-name-input:focus { border-color: var(--accent); }
+
+.pot-container {
+    width: 250px;
+    height: 200px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.pot {
+    width: 100%;
+    height: 100%;
+    background: var(--pot-color);
+    border-radius: 0 0 100px 100px;
+    position: relative;
+    border: 5px solid #1a252f;
+    box-shadow: inset 0 -20px 20px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* Le liquide */
+.pot-filling {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 0%;
+    background: linear-gradient(to top, #c0392b, #d35400); /* Soupe Verte (cohérent avec l'accent) */
+    transition: height 0.5s ease-out;
+    z-index: 3; opacity: 0.9;
+    box-shadow: inset 0 5px 10px rgba(0,0,0,0.2);
+}
+.pot-filling::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+    background: rgba(255,255,255,0.2); border-radius: 50%;
+}
+
+/* Bulles */
+.bubbles {
+    width: 100%; height: 100%;
+    background-image: radial-gradient(rgba(255,255,255,0.3) 10%, transparent 20%);
+    background-size: 20px 20px;
+    opacity: 0; transition: opacity 0.3s;
+}
+.pot.cooking-active .bubbles { opacity: 1; animation: bubbling 2s linear infinite; }
+@keyframes bubbling { from { background-position: 0 0; } to { background-position: 0 -20px; } }
+
+/* Poignées */
+.pot::before, .pot::after {
+    content: ''; position: absolute; top: 20px;
+    width: 40px; height: 20px; background: #1a252f;
+    border-radius: 5px; z-index: -1;
+}
+.pot::before { left: -45px; }
+.pot::after { right: -45px; }
+
+.pot.drag-over { transform: scale(1.05); border-color: var(--accent); }
+.pot.dropping { animation: bounce 0.4s; }
+.pot-label { color: rgba(255,255,255,0.1); font-size: 3rem; pointer-events: none; z-index: 1;}
+
+/* Cuillère */
+.spoon-container {
+    position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 200px; transform-origin: bottom center;
+    opacity: 0; transition: opacity 0.3s; z-index: 5; pointer-events: none;
+}
+.spoon-handle { width: 15px; height: 150px; background: #8e44ad; margin: 0 auto; border-radius: 5px; }
+.spoon-head {
+    width: 50px; height: 70px; background: #95a5a6;
+    border-radius: 50%; margin: -10px auto 0; position: relative; left: -15px;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.pot.cooking-active .spoon-container { opacity: 1; animation: stir 1s infinite linear; }
+.pot.cooking-active { animation: shake 0.5s infinite; }
+.splash-bubble {
+    position: absolute; top: 50%; left: 50%; width: 10px; height: 10px;
+    background: rgba(255,255,255,0.6); border-radius: 50%;
+    animation: popUp 0.6s ease-out forwards;
+}
+
+.fire {
+    width: 150px; height: 20px;
+    background: radial-gradient(circle, #e74c3c 20%, transparent 70%);
+    margin-top: -40px; z-index: -1; filter: blur(5px);
+    animation: flicker 0.1s infinite alternate;
+}
+
+/* --- Sidebar Droite --- */
+.tracker {
+    flex: 1;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+}
+
+.tracker-header h3 { margin: 0; color: var(--accent); }
+.info-order { font-size: 0.7rem; color: #e74c3c; font-weight: bold; }
+
+.added-ingredients-list {
+    list-style: none; padding: 0; flex-grow: 1; overflow-y: auto;
+    border-top: 2px solid #eee; margin-top: 10px;
+}
+
+.added-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px; background: #fff;
+    border-bottom: 1px solid #f0f0f0; margin-bottom: 2px; border-radius: 4px;
+}
+
+.step-infos { display: flex; align-items: center; }
+.step-infos span { margin-right: 10px; font-size: 1.2rem; }
+.step-number { 
+    background: var(--accent); color: white; 
+    border-radius: 50%; width: 20px; height: 20px; 
+    font-size: 0.8rem; display: flex; justify-content: center; align-items: center; 
+    margin-right: 10px; font-weight: bold;
+}
+
+.btn-remove { background: none; border: none; color: #e74c3c; font-size: 1.2rem; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; }
+.btn-remove:hover { opacity: 1; transform: scale(1.2); }
+
+.btn-cook {
+    margin-top: 10px; background: var(--accent); color: white;
+    border: none; padding: 15px; width: 100%;
+    font-size: 1.1rem; border-radius: 50px; /* Arrondi comme accueil */
+    cursor: pointer; transition: background 0.3s, transform 0.2s;
+    font-weight: 600;
+}
+.btn-cook:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-cook:disabled { background: #bdc3c7; cursor: wait; transform: none; }
+
+.category-separator {
+    text-align: center; font-size: 0.85rem; color: #95a5a6;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    padding: 15px 0 5px 0; width: 100%; list-style: none;
+}
+.category-separator:first-child { padding-top: 5px; }
+
+/* Link Register Harmonisé */
+.register-link { margin-top: 20px; text-align: center; color: #ffffff; font-size: 0.9rem; }
+.register-link a { color: #d35400; text-decoration: none; font-weight: bold; } /* Orange pour rappeler l'inscription */
+.register-link a:hover { text-decoration: underline; }
+
+/* Animations */
+@keyframes bounce { 0% { transform: scale(1); } 50% { transform: scale(0.95) translateY(5px); } 100% { transform: scale(1); } }
+@keyframes flicker { from { opacity: 0.8; transform: scale(1); } to { opacity: 1; transform: scale(1.05); } }
+@keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes popUp { 0% { opacity: 1; transform: scale(0) translateY(0); } 100% { opacity: 0; transform: scale(2) translateY(-50px); } }
+@keyframes stir {
+    0% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+    25% { transform: translateX(-50%) rotate(15deg) translateY(5px); }
+    50% { transform: translateX(-50%) rotate(0deg) translateY(10px); }
+    75% { transform: translateX(-50%) rotate(-15deg) translateY(5px); }
+    100% { transform: translateX(-50%) rotate(0deg) translateY(0); }
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1deg); }
+    75% { transform: rotate(-1deg); }
+    100% { transform: rotate(0deg); }
+}
+
+
+.chef {
+  position: absolute;            /* .cooking-zone est déjà position:relative */
+  right: -10px;
+  bottom: 230px;                 /* ajuste si besoin */
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  z-index: 50;
+}
+.chef[hidden] { display: none; }
+
+.chef-avatar { font-size: 48px; filter: drop-shadow(0 2px 2px rgba(0,0,0,.3)); }
+
+.chef-bubble {
+  max-width: 260px;
+  background: #fff;
+  color: #2c3e50;
+  padding: 10px 12px;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  white-space: pre-line;         /* pour gérer \n */
+  position: relative;
+}
+
+.chef-bubble::after {
+  content: "";
+  position: absolute;
+  top: 35px;         /* same vertical feel as your old bottom arrow */
+  left: -8px;        /* position arrow on the left */
+
+  border-width: 8px 8px 8px 0;   /* triangle pointing right */
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+}
+
+
+.chef.show { animation: chef-pop .15s ease-out; }
+@keyframes chef-pop { from { transform: scale(.95); opacity: 0;} to { transform: scale(1); opacity: 1;} }
+
+
+
